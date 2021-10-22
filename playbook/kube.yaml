@@ -1,0 +1,10 @@
+---
+- name: Kube-Deploy
+  hosts: kube_host
+  gather_facts: no
+
+  tasks:
+  - name: Create Myweb
+    command: kubectl create deployment myweb --replicas=3 --image=aicore00/mywebapp
+  - name: Expose Myweb
+    command: kubectl expose deployment myweb --name mysvc --port 80 --target-port 8080 --type LoadBalancer
